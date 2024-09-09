@@ -25,7 +25,7 @@ except NameError:
     imgur_id = input('Input your Imgur client id: ')
 
     with open('creds.txt', 'w') as file:
-        file.write(client_id + " - " + client_secret + " - " + user_agent + " - " + username + " - " + password)
+        file.write(client_id + " - " + client_secret + " - " + user_agent + " - " + username + " - " + password + " - " + imgur_id)
 
     reddit = praw.Reddit(client_id=client_id,
                          client_secret=client_secret,
