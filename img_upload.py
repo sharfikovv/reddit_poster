@@ -1,7 +1,6 @@
 import requests
 
-def upload_image_to_imgur(image_url):
-    client_id = ''
+def upload_image_to_imgur(image_url, client_id):
     url = "https://api.imgur.com/3/upload"
     headers = {
         'Authorization': f'Client-ID {client_id}',

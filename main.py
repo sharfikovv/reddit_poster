@@ -8,7 +8,7 @@ from img_upload import upload_image_to_imgur
 
 with open('creds.txt', 'r') as file:
     for line in file:
-        client_id, client_secret, user_agent, username, password = line.strip().split(' - ')
+        client_id, client_secret, user_agent, username, password, imgur_id = line.strip().split(' - ')
 
 try:
     reddit = praw.Reddit(client_id=client_id,
@@ -22,6 +22,7 @@ except NameError:
     user_agent = input('Input your Reddit user agent: ')
     username = input('Input your Reddit username: ')
     password = input('Input your Reddit password: ')
+    imgur_id = input('Input your Imgur client id: ')
 
     with open('creds.txt', 'w') as file:
         file.write(client_id + " - " + client_secret + " - " + user_agent + " - " + username + " - " + password)
@@ -60,7 +61,7 @@ def post_to_subreddit(subreddit_name, photo_file, titlefile, flair_text, day):
             with open(photo_file, 'r') as file:
                 photos = file.readlines()
                 photo_upload = random.choice(photos).strip()
-                photo_url = upload_image_to_imgur(photo_upload)
+                photo_url = upload_image_to_imgur(photo_upload, imgur_id)
 
             subreddit = reddit.subreddit(subreddit_name)
 
@@ -77,7 +78,7 @@ def post_to_subreddit(subreddit_name, photo_file, titlefile, flair_text, day):
             with open(photo_file, 'r') as file:
                 photos = file.readlines()
                 photo_upload = random.choice(photos).strip()
-                photo_url = upload_image_to_imgur(photo_upload)
+                photo_url = upload_image_to_imgur(photo_upload, imgur_id)
 
             subreddit = reddit.subreddit(subreddit_name)
             print("Publishing to ", subreddit_name, photo_url)
